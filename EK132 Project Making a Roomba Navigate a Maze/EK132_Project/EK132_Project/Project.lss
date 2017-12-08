@@ -1,0 +1,1179 @@
+
+Project.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000004d0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000007  00800100  00800100  00000544  2**0
+                  ALLOC
+  2 .debug_aranges 00000020  00000000  00000000  00000544  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 000000f5  00000000  00000000  00000564  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000073e  00000000  00000000  00000659  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000164  00000000  00000000  00000d97  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000604  00000000  00000000  00000efb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000000e0  00000000  00000000  00001500  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000012b  00000000  00000000  000015e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000061  00000000  00000000  0000170b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_11>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d4 e0       	ldi	r29, 0x04	; 4
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a7 30       	cpi	r26, 0x07	; 7
+  80:	b1 07       	cpc	r27, r17
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <main>
+  88:	0c 94 66 02 	jmp	0x4cc	; 0x4cc <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <__vector_11>:
+//else is happening. This makes it ideal for timing functions.
+//In fact, it is already configured to work properly as a delay timer.
+//The DelayMS function utilizes this function to decrease timerRunning once
+//every millisecond. Once timerRunning reaches 0, the delayMS function quits 
+//and the program resumes.
+SIGNAL(SIG_OUTPUT_COMPARE1A) {	\
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	8f 93       	push	r24
+  9c:	9f 93       	push	r25
+	if(timerRunning) {
+  9e:	80 91 06 01 	lds	r24, 0x0106
+  a2:	88 23       	and	r24, r24
+  a4:	91 f0       	breq	.+36     	; 0xca <__vector_11+0x3a>
+		if(timerCount != 0) {
+  a6:	80 91 04 01 	lds	r24, 0x0104
+  aa:	90 91 05 01 	lds	r25, 0x0105
+  ae:	89 2b       	or	r24, r25
+  b0:	51 f0       	breq	.+20     	; 0xc6 <__vector_11+0x36>
+			timerCount--;
+  b2:	80 91 04 01 	lds	r24, 0x0104
+  b6:	90 91 05 01 	lds	r25, 0x0105
+  ba:	01 97       	sbiw	r24, 0x01	; 1
+  bc:	90 93 05 01 	sts	0x0105, r25
+  c0:	80 93 04 01 	sts	0x0104, r24
+  c4:	02 c0       	rjmp	.+4      	; 0xca <__vector_11+0x3a>
+		} else {
+				timerRunning = 0;
+  c6:	10 92 06 01 	sts	0x0106, r1
+			}
+	}
+timer++;
+  ca:	80 91 00 01 	lds	r24, 0x0100
+  ce:	90 91 01 01 	lds	r25, 0x0101
+  d2:	01 96       	adiw	r24, 0x01	; 1
+  d4:	90 93 01 01 	sts	0x0101, r25
+  d8:	80 93 00 01 	sts	0x0100, r24
+}
+  dc:	9f 91       	pop	r25
+  de:	8f 91       	pop	r24
+  e0:	0f 90       	pop	r0
+  e2:	0f be       	out	0x3f, r0	; 63
+  e4:	0f 90       	pop	r0
+  e6:	1f 90       	pop	r1
+  e8:	18 95       	reti
+
+000000ea <byteTx>:
+//This is the function for sending data, one byte at a time,
+//to the iRobot. It waits until the transmission lines are clear
+//and then transmits the byte, value, to the robot.
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+  ea:	98 2f       	mov	r25, r24
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+  ec:	80 91 c0 00 	lds	r24, 0x00C0
+  f0:	85 ff       	sbrs	r24, 5
+  f2:	fc cf       	rjmp	.-8      	; 0xec <byteTx+0x2>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+  f4:	90 93 c6 00 	sts	0x00C6, r25
+}
+  f8:	08 95       	ret
+
+000000fa <clearReceiveBuffer>:
+//This clears old data out of the input registers.
+//Without calling this method before attempting to read in input the
+//iRobot will behave very differently than expected. USE THIS BEFORE REQUESTING
+//EVERY BYTE OF DATA!!
+void clearReceiveBuffer(){
+  fa:	02 c0       	rjmp	.+4      	; 0x100 <clearReceiveBuffer+0x6>
+	uint8_t empty; //Buffer drain.
+	while(UCSR0A & 0x80) {/* waits for the buffer to empty */
+		empty = UDR0;
+  fc:	80 91 c6 00 	lds	r24, 0x00C6
+//Without calling this method before attempting to read in input the
+//iRobot will behave very differently than expected. USE THIS BEFORE REQUESTING
+//EVERY BYTE OF DATA!!
+void clearReceiveBuffer(){
+	uint8_t empty; //Buffer drain.
+	while(UCSR0A & 0x80) {/* waits for the buffer to empty */
+ 100:	80 91 c0 00 	lds	r24, 0x00C0
+ 104:	87 fd       	sbrc	r24, 7
+ 106:	fa cf       	rjmp	.-12     	; 0xfc <clearReceiveBuffer+0x2>
+		empty = UDR0;
+	}
+	
+}
+ 108:	08 95       	ret
+
+0000010a <byteRx>:
+//It is important to realize that byteRx will wait until there
+//is a byte to receive before doing anything. As a result,
+//if you use byteRx, your program will pause until it is sent
+//a byte from the iRobot.
+uint8_t byteRx(void){	
+	while(!(UCSR0A & 0x80)) ;
+ 10a:	80 91 c0 00 	lds	r24, 0x00C0
+ 10e:	87 ff       	sbrs	r24, 7
+ 110:	fc cf       	rjmp	.-8      	; 0x10a <byteRx>
+	/* wait until a byte is received */
+	return UDR0;
+ 112:	80 91 c6 00 	lds	r24, 0x00C6
+}
+ 116:	08 95       	ret
+
+00000118 <setupTimer>:
+/*****************************************************
+*	Initialization Code. (dont worry about this stuff)
+/****************************************************/
+void setupTimer(void) {
+	// Set up the timer 1 interupt to be called every 1ms.
+	TCCR1A = 0x00;
+ 118:	10 92 80 00 	sts	0x0080, r1
+	TCCR1B = 0x0C;
+ 11c:	8c e0       	ldi	r24, 0x0C	; 12
+ 11e:	80 93 81 00 	sts	0x0081, r24
+	OCR1A = 71;
+ 122:	87 e4       	ldi	r24, 0x47	; 71
+ 124:	90 e0       	ldi	r25, 0x00	; 0
+ 126:	90 93 89 00 	sts	0x0089, r25
+ 12a:	80 93 88 00 	sts	0x0088, r24
+	TIMSK1 = 0x02;
+ 12e:	82 e0       	ldi	r24, 0x02	; 2
+ 130:	80 93 6f 00 	sts	0x006F, r24
+}
+ 134:	08 95       	ret
+
+00000136 <delayMs>:
+void delayMs(uint16_t timeMs) {
+	timerCount = timeMs;
+ 136:	90 93 05 01 	sts	0x0105, r25
+ 13a:	80 93 04 01 	sts	0x0104, r24
+	timerRunning = 1;
+ 13e:	81 e0       	ldi	r24, 0x01	; 1
+ 140:	80 93 06 01 	sts	0x0106, r24
+	//timerCount gets decremented every 1ms by the 
+	//interrupt function above. Once the interrupt determines
+	//that timerCount has been reduced to 0, it sets timerRunning
+	//to 0, which will terminate the following while loop.
+	while(timerRunning) {
+ 144:	80 91 06 01 	lds	r24, 0x0106
+ 148:	88 23       	and	r24, r24
+ 14a:	e1 f7       	brne	.-8      	; 0x144 <delayMs+0xe>
+	// do nothing
+	}
+}
+ 14c:	08 95       	ret
+
+0000014e <setupSerial>:
+
+void setupSerial(void) {
+	// Set the transmission speed to 57600 baud, which is what the Create expects,
+	// unless we tell it otherwise.
+	UBRR0 = 19;
+ 14e:	83 e1       	ldi	r24, 0x13	; 19
+ 150:	90 e0       	ldi	r25, 0x00	; 0
+ 152:	90 93 c5 00 	sts	0x00C5, r25
+ 156:	80 93 c4 00 	sts	0x00C4, r24
+	// Enable both transmit and receive.
+	UCSR0B = 0x18;
+ 15a:	88 e1       	ldi	r24, 0x18	; 24
+ 15c:	80 93 c1 00 	sts	0x00C1, r24
+	// Set 8-bit data.
+	UCSR0C = 0x06;
+ 160:	86 e0       	ldi	r24, 0x06	; 6
+ 162:	80 93 c2 00 	sts	0x00C2, r24
+}
+ 166:	08 95       	ret
+
+00000168 <turn180>:
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 168:	80 91 c0 00 	lds	r24, 0x00C0
+ 16c:	85 ff       	sbrs	r24, 5
+ 16e:	fc cf       	rjmp	.-8      	; 0x168 <turn180>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 170:	89 e8       	ldi	r24, 0x89	; 137
+ 172:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 176:	80 91 c0 00 	lds	r24, 0x00C0
+ 17a:	85 ff       	sbrs	r24, 5
+ 17c:	fc cf       	rjmp	.-8      	; 0x176 <turn180+0xe>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 17e:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 182:	80 91 c0 00 	lds	r24, 0x00C0
+ 186:	85 ff       	sbrs	r24, 5
+ 188:	fc cf       	rjmp	.-8      	; 0x182 <turn180+0x1a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 18a:	80 e8       	ldi	r24, 0x80	; 128
+ 18c:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 190:	80 91 c0 00 	lds	r24, 0x00C0
+ 194:	85 ff       	sbrs	r24, 5
+ 196:	fc cf       	rjmp	.-8      	; 0x190 <turn180+0x28>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 198:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 19c:	80 91 c0 00 	lds	r24, 0x00C0
+ 1a0:	85 ff       	sbrs	r24, 5
+ 1a2:	fc cf       	rjmp	.-8      	; 0x19c <turn180+0x34>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 1a4:	10 92 c6 00 	sts	0x00C6, r1
+	TCCR1B = 0x0C;
+	OCR1A = 71;
+	TIMSK1 = 0x02;
+}
+void delayMs(uint16_t timeMs) {
+	timerCount = timeMs;
+ 1a8:	8e ef       	ldi	r24, 0xFE	; 254
+ 1aa:	9b e0       	ldi	r25, 0x0B	; 11
+ 1ac:	90 93 05 01 	sts	0x0105, r25
+ 1b0:	80 93 04 01 	sts	0x0104, r24
+	timerRunning = 1;
+ 1b4:	81 e0       	ldi	r24, 0x01	; 1
+ 1b6:	80 93 06 01 	sts	0x0106, r24
+	//timerCount gets decremented every 1ms by the 
+	//interrupt function above. Once the interrupt determines
+	//that timerCount has been reduced to 0, it sets timerRunning
+	//to 0, which will terminate the following while loop.
+	while(timerRunning) {
+ 1ba:	80 91 06 01 	lds	r24, 0x0106
+ 1be:	88 23       	and	r24, r24
+ 1c0:	e1 f7       	brne	.-8      	; 0x1ba <turn180+0x52>
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 1c2:	80 91 c0 00 	lds	r24, 0x00C0
+ 1c6:	85 ff       	sbrs	r24, 5
+ 1c8:	fc cf       	rjmp	.-8      	; 0x1c2 <turn180+0x5a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 1ca:	89 e8       	ldi	r24, 0x89	; 137
+ 1cc:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 1d0:	80 91 c0 00 	lds	r24, 0x00C0
+ 1d4:	85 ff       	sbrs	r24, 5
+ 1d6:	fc cf       	rjmp	.-8      	; 0x1d0 <turn180+0x68>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 1d8:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 1dc:	80 91 c0 00 	lds	r24, 0x00C0
+ 1e0:	85 ff       	sbrs	r24, 5
+ 1e2:	fc cf       	rjmp	.-8      	; 0x1dc <turn180+0x74>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 1e4:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 1e8:	80 91 c0 00 	lds	r24, 0x00C0
+ 1ec:	85 ff       	sbrs	r24, 5
+ 1ee:	fc cf       	rjmp	.-8      	; 0x1e8 <turn180+0x80>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 1f0:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 1f4:	80 91 c0 00 	lds	r24, 0x00C0
+ 1f8:	85 ff       	sbrs	r24, 5
+ 1fa:	fc cf       	rjmp	.-8      	; 0x1f4 <turn180+0x8c>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 1fc:	10 92 c6 00 	sts	0x00C6, r1
+	byteTx(137); //Driving nowhere
+	byteTx(0);
+	byteTx(0);
+	byteTx(0);
+	byteTx(0);
+}
+ 200:	08 95       	ret
+
+00000202 <turn90>:
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 202:	80 91 c0 00 	lds	r24, 0x00C0
+ 206:	85 ff       	sbrs	r24, 5
+ 208:	fc cf       	rjmp	.-8      	; 0x202 <turn90>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 20a:	89 e8       	ldi	r24, 0x89	; 137
+ 20c:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 210:	80 91 c0 00 	lds	r24, 0x00C0
+ 214:	85 ff       	sbrs	r24, 5
+ 216:	fc cf       	rjmp	.-8      	; 0x210 <turn90+0xe>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 218:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 21c:	80 91 c0 00 	lds	r24, 0x00C0
+ 220:	85 ff       	sbrs	r24, 5
+ 222:	fc cf       	rjmp	.-8      	; 0x21c <turn90+0x1a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 224:	80 e8       	ldi	r24, 0x80	; 128
+ 226:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 22a:	80 91 c0 00 	lds	r24, 0x00C0
+ 22e:	85 ff       	sbrs	r24, 5
+ 230:	fc cf       	rjmp	.-8      	; 0x22a <turn90+0x28>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 232:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 236:	80 91 c0 00 	lds	r24, 0x00C0
+ 23a:	85 ff       	sbrs	r24, 5
+ 23c:	fc cf       	rjmp	.-8      	; 0x236 <turn90+0x34>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 23e:	10 92 c6 00 	sts	0x00C6, r1
+	TCCR1B = 0x0C;
+	OCR1A = 71;
+	TIMSK1 = 0x02;
+}
+void delayMs(uint16_t timeMs) {
+	timerCount = timeMs;
+ 242:	82 e2       	ldi	r24, 0x22	; 34
+ 244:	96 e0       	ldi	r25, 0x06	; 6
+ 246:	90 93 05 01 	sts	0x0105, r25
+ 24a:	80 93 04 01 	sts	0x0104, r24
+	timerRunning = 1;
+ 24e:	81 e0       	ldi	r24, 0x01	; 1
+ 250:	80 93 06 01 	sts	0x0106, r24
+	//timerCount gets decremented every 1ms by the 
+	//interrupt function above. Once the interrupt determines
+	//that timerCount has been reduced to 0, it sets timerRunning
+	//to 0, which will terminate the following while loop.
+	while(timerRunning) {
+ 254:	80 91 06 01 	lds	r24, 0x0106
+ 258:	88 23       	and	r24, r24
+ 25a:	e1 f7       	brne	.-8      	; 0x254 <turn90+0x52>
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 25c:	80 91 c0 00 	lds	r24, 0x00C0
+ 260:	85 ff       	sbrs	r24, 5
+ 262:	fc cf       	rjmp	.-8      	; 0x25c <turn90+0x5a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 264:	89 e8       	ldi	r24, 0x89	; 137
+ 266:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 26a:	80 91 c0 00 	lds	r24, 0x00C0
+ 26e:	85 ff       	sbrs	r24, 5
+ 270:	fc cf       	rjmp	.-8      	; 0x26a <turn90+0x68>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 272:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 276:	80 91 c0 00 	lds	r24, 0x00C0
+ 27a:	85 ff       	sbrs	r24, 5
+ 27c:	fc cf       	rjmp	.-8      	; 0x276 <turn90+0x74>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 27e:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 282:	80 91 c0 00 	lds	r24, 0x00C0
+ 286:	85 ff       	sbrs	r24, 5
+ 288:	fc cf       	rjmp	.-8      	; 0x282 <turn90+0x80>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 28a:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 28e:	80 91 c0 00 	lds	r24, 0x00C0
+ 292:	85 ff       	sbrs	r24, 5
+ 294:	fc cf       	rjmp	.-8      	; 0x28e <turn90+0x8c>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 296:	10 92 c6 00 	sts	0x00C6, r1
+	byteTx(137); //Driving nowhere
+	byteTx(0);
+	byteTx(0);
+	byteTx(0);
+	byteTx(0);
+	}
+ 29a:	08 95       	ret
+
+0000029c <drivebump>:
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 29c:	80 91 c0 00 	lds	r24, 0x00C0
+ 2a0:	85 ff       	sbrs	r24, 5
+ 2a2:	fc cf       	rjmp	.-8      	; 0x29c <drivebump>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2a4:	88 e9       	ldi	r24, 0x98	; 152
+ 2a6:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2aa:	80 91 c0 00 	lds	r24, 0x00C0
+ 2ae:	85 ff       	sbrs	r24, 5
+ 2b0:	fc cf       	rjmp	.-8      	; 0x2aa <drivebump+0xe>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2b2:	89 e0       	ldi	r24, 0x09	; 9
+ 2b4:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2b8:	80 91 c0 00 	lds	r24, 0x00C0
+ 2bc:	85 ff       	sbrs	r24, 5
+ 2be:	fc cf       	rjmp	.-8      	; 0x2b8 <drivebump+0x1c>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2c0:	89 e8       	ldi	r24, 0x89	; 137
+ 2c2:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2c6:	80 91 c0 00 	lds	r24, 0x00C0
+ 2ca:	85 ff       	sbrs	r24, 5
+ 2cc:	fc cf       	rjmp	.-8      	; 0x2c6 <drivebump+0x2a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2ce:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2d2:	80 91 c0 00 	lds	r24, 0x00C0
+ 2d6:	85 ff       	sbrs	r24, 5
+ 2d8:	fc cf       	rjmp	.-8      	; 0x2d2 <drivebump+0x36>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2da:	80 e8       	ldi	r24, 0x80	; 128
+ 2dc:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2e0:	80 91 c0 00 	lds	r24, 0x00C0
+ 2e4:	85 ff       	sbrs	r24, 5
+ 2e6:	fc cf       	rjmp	.-8      	; 0x2e0 <drivebump+0x44>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2e8:	8f e7       	ldi	r24, 0x7F	; 127
+ 2ea:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2ee:	80 91 c0 00 	lds	r24, 0x00C0
+ 2f2:	85 ff       	sbrs	r24, 5
+ 2f4:	fc cf       	rjmp	.-8      	; 0x2ee <drivebump+0x52>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 2f6:	8f ef       	ldi	r24, 0xFF	; 255
+ 2f8:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 2fc:	80 91 c0 00 	lds	r24, 0x00C0
+ 300:	85 ff       	sbrs	r24, 5
+ 302:	fc cf       	rjmp	.-8      	; 0x2fc <drivebump+0x60>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 304:	8e e9       	ldi	r24, 0x9E	; 158
+ 306:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 30a:	80 91 c0 00 	lds	r24, 0x00C0
+ 30e:	85 ff       	sbrs	r24, 5
+ 310:	fc cf       	rjmp	.-8      	; 0x30a <drivebump+0x6e>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 312:	85 e0       	ldi	r24, 0x05	; 5
+ 314:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 318:	80 91 c0 00 	lds	r24, 0x00C0
+ 31c:	85 ff       	sbrs	r24, 5
+ 31e:	fc cf       	rjmp	.-8      	; 0x318 <drivebump+0x7c>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 320:	8e e8       	ldi	r24, 0x8E	; 142
+ 322:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 326:	80 91 c0 00 	lds	r24, 0x00C0
+ 32a:	85 ff       	sbrs	r24, 5
+ 32c:	fc cf       	rjmp	.-8      	; 0x326 <drivebump+0x8a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 32e:	87 e0       	ldi	r24, 0x07	; 7
+ 330:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 334:	80 91 c0 00 	lds	r24, 0x00C0
+ 338:	85 ff       	sbrs	r24, 5
+ 33a:	fc cf       	rjmp	.-8      	; 0x334 <drivebump+0x98>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 33c:	89 e9       	ldi	r24, 0x99	; 153
+ 33e:	80 93 c6 00 	sts	0x00C6, r24
+	byteTx(158); //Look for bump
+	byteTx(5);
+	byteTx(142);//Bump Sensor
+	byteTx(7);
+	byteTx(153);
+	}
+ 342:	08 95       	ret
+
+00000344 <driveback>:
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 344:	80 91 c0 00 	lds	r24, 0x00C0
+ 348:	85 ff       	sbrs	r24, 5
+ 34a:	fc cf       	rjmp	.-8      	; 0x344 <driveback>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 34c:	89 e8       	ldi	r24, 0x89	; 137
+ 34e:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 352:	80 91 c0 00 	lds	r24, 0x00C0
+ 356:	85 ff       	sbrs	r24, 5
+ 358:	fc cf       	rjmp	.-8      	; 0x352 <driveback+0xe>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 35a:	8f ef       	ldi	r24, 0xFF	; 255
+ 35c:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 360:	80 91 c0 00 	lds	r24, 0x00C0
+ 364:	85 ff       	sbrs	r24, 5
+ 366:	fc cf       	rjmp	.-8      	; 0x360 <driveback+0x1c>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 368:	8e ec       	ldi	r24, 0xCE	; 206
+ 36a:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 36e:	80 91 c0 00 	lds	r24, 0x00C0
+ 372:	85 ff       	sbrs	r24, 5
+ 374:	fc cf       	rjmp	.-8      	; 0x36e <driveback+0x2a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 376:	8f e7       	ldi	r24, 0x7F	; 127
+ 378:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 37c:	80 91 c0 00 	lds	r24, 0x00C0
+ 380:	85 ff       	sbrs	r24, 5
+ 382:	fc cf       	rjmp	.-8      	; 0x37c <driveback+0x38>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 384:	8f ef       	ldi	r24, 0xFF	; 255
+ 386:	80 93 c6 00 	sts	0x00C6, r24
+	TCCR1B = 0x0C;
+	OCR1A = 71;
+	TIMSK1 = 0x02;
+}
+void delayMs(uint16_t timeMs) {
+	timerCount = timeMs;
+ 38a:	88 ee       	ldi	r24, 0xE8	; 232
+ 38c:	93 e0       	ldi	r25, 0x03	; 3
+ 38e:	90 93 05 01 	sts	0x0105, r25
+ 392:	80 93 04 01 	sts	0x0104, r24
+	timerRunning = 1;
+ 396:	81 e0       	ldi	r24, 0x01	; 1
+ 398:	80 93 06 01 	sts	0x0106, r24
+	//timerCount gets decremented every 1ms by the 
+	//interrupt function above. Once the interrupt determines
+	//that timerCount has been reduced to 0, it sets timerRunning
+	//to 0, which will terminate the following while loop.
+	while(timerRunning) {
+ 39c:	80 91 06 01 	lds	r24, 0x0106
+ 3a0:	88 23       	and	r24, r24
+ 3a2:	e1 f7       	brne	.-8      	; 0x39c <driveback+0x58>
+	byteTx(255);
+	byteTx(206);
+	byteTx(127);
+	byteTx(255);
+	delayMs(1000);
+	}
+ 3a4:	08 95       	ret
+
+000003a6 <nomove>:
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 3a6:	80 91 c0 00 	lds	r24, 0x00C0
+ 3aa:	85 ff       	sbrs	r24, 5
+ 3ac:	fc cf       	rjmp	.-8      	; 0x3a6 <nomove>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 3ae:	89 e8       	ldi	r24, 0x89	; 137
+ 3b0:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 3b4:	80 91 c0 00 	lds	r24, 0x00C0
+ 3b8:	85 ff       	sbrs	r24, 5
+ 3ba:	fc cf       	rjmp	.-8      	; 0x3b4 <nomove+0xe>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 3bc:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 3c0:	80 91 c0 00 	lds	r24, 0x00C0
+ 3c4:	85 ff       	sbrs	r24, 5
+ 3c6:	fc cf       	rjmp	.-8      	; 0x3c0 <nomove+0x1a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 3c8:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 3cc:	80 91 c0 00 	lds	r24, 0x00C0
+ 3d0:	85 ff       	sbrs	r24, 5
+ 3d2:	fc cf       	rjmp	.-8      	; 0x3cc <nomove+0x26>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 3d4:	10 92 c6 00 	sts	0x00C6, r1
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 3d8:	80 91 c0 00 	lds	r24, 0x00C0
+ 3dc:	85 ff       	sbrs	r24, 5
+ 3de:	fc cf       	rjmp	.-8      	; 0x3d8 <nomove+0x32>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 3e0:	10 92 c6 00 	sts	0x00C6, r1
+byteTx(137);
+byteTx(0);
+byteTx(0);
+byteTx(0);
+byteTx(0);
+ 3e4:	08 95       	ret
+
+000003e6 <main>:
+/*********************/
+volatile uint16_t timerCount = 0;
+volatile uint8_t timerRunning = 0;
+
+
+int main(void){
+ 3e6:	cf 93       	push	r28
+ 3e8:	df 93       	push	r29
+	/**************************
+	* Run intialization methods.
+	/**************************/
+	int state=0;
+	int x=0;
+	cli();
+ 3ea:	f8 94       	cli
+}
+
+void setupSerial(void) {
+	// Set the transmission speed to 57600 baud, which is what the Create expects,
+	// unless we tell it otherwise.
+	UBRR0 = 19;
+ 3ec:	83 e1       	ldi	r24, 0x13	; 19
+ 3ee:	90 e0       	ldi	r25, 0x00	; 0
+ 3f0:	90 93 c5 00 	sts	0x00C5, r25
+ 3f4:	80 93 c4 00 	sts	0x00C4, r24
+	// Enable both transmit and receive.
+	UCSR0B = 0x18;
+ 3f8:	88 e1       	ldi	r24, 0x18	; 24
+ 3fa:	80 93 c1 00 	sts	0x00C1, r24
+	// Set 8-bit data.
+	UCSR0C = 0x06;
+ 3fe:	86 e0       	ldi	r24, 0x06	; 6
+ 400:	80 93 c2 00 	sts	0x00C2, r24
+/*****************************************************
+*	Initialization Code. (dont worry about this stuff)
+/****************************************************/
+void setupTimer(void) {
+	// Set up the timer 1 interupt to be called every 1ms.
+	TCCR1A = 0x00;
+ 404:	10 92 80 00 	sts	0x0080, r1
+	TCCR1B = 0x0C;
+ 408:	8c e0       	ldi	r24, 0x0C	; 12
+ 40a:	80 93 81 00 	sts	0x0081, r24
+	OCR1A = 71;
+ 40e:	87 e4       	ldi	r24, 0x47	; 71
+ 410:	90 e0       	ldi	r25, 0x00	; 0
+ 412:	90 93 89 00 	sts	0x0089, r25
+ 416:	80 93 88 00 	sts	0x0088, r24
+	TIMSK1 = 0x02;
+ 41a:	82 e0       	ldi	r24, 0x02	; 2
+ 41c:	80 93 6f 00 	sts	0x006F, r24
+	cli();
+	//Properly set serial pins.
+	setupSerial();
+	//Create the 1 microsecond interrupt.
+	setupTimer();
+	sei();
+ 420:	78 94       	sei
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 422:	80 91 c0 00 	lds	r24, 0x00C0
+ 426:	85 ff       	sbrs	r24, 5
+ 428:	fc cf       	rjmp	.-8      	; 0x422 <main+0x3c>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 42a:	80 e8       	ldi	r24, 0x80	; 128
+ 42c:	80 93 c6 00 	sts	0x00C6, r24
+//So if you wanted to send the number 128 to the iRobot, you would use
+//byteTx(128).
+void byteTx(uint8_t value) {
+	// Transmit one byte to the robot.
+	// Wait for the buffer to be empty.
+	while(!(UCSR0A & 0x20)) {
+ 430:	80 91 c0 00 	lds	r24, 0x00C0
+ 434:	85 ff       	sbrs	r24, 5
+ 436:	fc cf       	rjmp	.-8      	; 0x430 <main+0x4a>
+	// Do nothing.
+	}
+	// Send the byte.
+	UDR0 = value;
+ 438:	84 e8       	ldi	r24, 0x84	; 132
+ 43a:	80 93 c6 00 	sts	0x00C6, r24
+	TCCR1B = 0x0C;
+	OCR1A = 71;
+	TIMSK1 = 0x02;
+}
+void delayMs(uint16_t timeMs) {
+	timerCount = timeMs;
+ 43e:	88 ee       	ldi	r24, 0xE8	; 232
+ 440:	93 e0       	ldi	r25, 0x03	; 3
+ 442:	90 93 05 01 	sts	0x0105, r25
+ 446:	80 93 04 01 	sts	0x0104, r24
+	timerRunning = 1;
+ 44a:	81 e0       	ldi	r24, 0x01	; 1
+ 44c:	80 93 06 01 	sts	0x0106, r24
+	//timerCount gets decremented every 1ms by the 
+	//interrupt function above. Once the interrupt determines
+	//that timerCount has been reduced to 0, it sets timerRunning
+	//to 0, which will terminate the following while loop.
+	while(timerRunning) {
+ 450:	80 91 06 01 	lds	r24, 0x0106
+ 454:	88 23       	and	r24, r24
+ 456:	e1 f7       	brne	.-8      	; 0x450 <main+0x6a>
+	//Turn on and Full Mode
+	byteTx(128);
+	byteTx(132);
+	x=0;
+	delayMs(1000);
+	drivebump();
+ 458:	0e 94 4e 01 	call	0x29c	; 0x29c <drivebump>
+ 45c:	c0 e0       	ldi	r28, 0x00	; 0
+ 45e:	d0 e0       	ldi	r29, 0x00	; 0
+//It is important to realize that byteRx will wait until there
+//is a byte to receive before doing anything. As a result,
+//if you use byteRx, your program will pause until it is sent
+//a byte from the iRobot.
+uint8_t byteRx(void){	
+	while(!(UCSR0A & 0x80)) ;
+ 460:	80 91 c0 00 	lds	r24, 0x00C0
+ 464:	87 ff       	sbrs	r24, 7
+ 466:	fc cf       	rjmp	.-8      	; 0x460 <main+0x7a>
+	/* wait until a byte is received */
+	return UDR0;
+ 468:	80 91 c6 00 	lds	r24, 0x00C6
+	byteTx(132);
+	x=0;
+	delayMs(1000);
+	drivebump();
+	while(x==0){	
+		event=byteRx();
+ 46c:	80 93 02 01 	sts	0x0102, r24
+ 470:	10 92 03 01 	sts	0x0103, r1
+		nomove();
+ 474:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <nomove>
+		driveback();
+ 478:	0e 94 a2 01 	call	0x344	; 0x344 <driveback>
+		if(timer>4000){
+ 47c:	80 91 00 01 	lds	r24, 0x0100
+ 480:	90 91 01 01 	lds	r25, 0x0101
+ 484:	81 5a       	subi	r24, 0xA1	; 161
+ 486:	9f 40       	sbci	r25, 0x0F	; 15
+ 488:	6c f0       	brlt	.+26     	; 0x4a4 <main+0xbe>
+			state=1;
+			nomove();
+ 48a:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <nomove>
+			turn90();
+ 48e:	0e 94 01 01 	call	0x202	; 0x202 <turn90>
+			timer=0;
+ 492:	10 92 01 01 	sts	0x0101, r1
+ 496:	10 92 00 01 	sts	0x0100, r1
+			drivebump();
+ 49a:	0e 94 4e 01 	call	0x29c	; 0x29c <drivebump>
+ 49e:	c1 e0       	ldi	r28, 0x01	; 1
+ 4a0:	d0 e0       	ldi	r29, 0x00	; 0
+ 4a2:	de cf       	rjmp	.-68     	; 0x460 <main+0x7a>
+		}
+		else{
+			if (state==1){
+ 4a4:	21 97       	sbiw	r28, 0x01	; 1
+ 4a6:	59 f4       	brne	.+22     	; 0x4be <main+0xd8>
+			state=2;
+			turn180();//Turning 180 Degrees left
+ 4a8:	0e 94 b4 00 	call	0x168	; 0x168 <turn180>
+			timer=0;
+ 4ac:	10 92 01 01 	sts	0x0101, r1
+ 4b0:	10 92 00 01 	sts	0x0100, r1
+			drivebump();
+ 4b4:	0e 94 4e 01 	call	0x29c	; 0x29c <drivebump>
+ 4b8:	c2 e0       	ldi	r28, 0x02	; 2
+ 4ba:	d0 e0       	ldi	r29, 0x00	; 0
+ 4bc:	d1 cf       	rjmp	.-94     	; 0x460 <main+0x7a>
+			}
+			else{
+			//STOP!!!
+			nomove();
+ 4be:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <nomove>
+			x=1;
+			}
+		}
+	
+	}
+}
+ 4c2:	80 e0       	ldi	r24, 0x00	; 0
+ 4c4:	90 e0       	ldi	r25, 0x00	; 0
+ 4c6:	df 91       	pop	r29
+ 4c8:	cf 91       	pop	r28
+ 4ca:	08 95       	ret
+
+000004cc <_exit>:
+ 4cc:	f8 94       	cli
+
+000004ce <__stop_program>:
+ 4ce:	ff cf       	rjmp	.-2      	; 0x4ce <__stop_program>
