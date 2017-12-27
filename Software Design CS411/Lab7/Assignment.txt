@@ -1,0 +1,40 @@
+In this assignment you will write a useful utility to encrypt files.
+
+I have provided a working copy of this assignment Lab 7 Demo on the course web site that you can use to validate the correctness of your version. The user interface looks like this:
+
+Clicking on the folder button (image is required) opens a dialog to select either the encrypted or unencrypted file. Encrypted files have the extension ".enc." 
+This is enforced by  the decrypt function. The image I used can be found at OpenPH.bmp.
+
+An arbitrary length key is entered in the key text box. It must be at least one character and can use any characters including punctuation.
+
+Hitting either encrypt or decrypt performs the corresponding operation. The file extension ".enc" is appended to the file name when encrypting and that is the file written. 
+When decrypting, the .enc extension is removed to name the destination file. Consider decrypting to a file that already exists. How do you handle it?on
+
+Encryption Algorithmf the charac
+The encryption is done by performing an exclusive OR (^ operator) on each byte of the file and a corresponding character in the key cast to a byte. 
+Byte 1 of the file is XORed with byte 1 of the key. Byte 2 of the file is XORed with byte 2 of the key etc. After using the last byte of the key we go back to the first byte of the key wrapping around as many times as needed. 
+The character in the Unicode key string is cast to a byte (byte).
+
+This same algorithm is used to decrypt the file. Two consequitive XOR operations cancel each other.
+
+Error Detection and Reporting
+The following errors must be reported by a message box and the program should recover properly:
+
+Missing key
+
+Try to decrypt a file not ending in .enc
+
+Failure to open a source or destination file
+
+Overwrite of existing file
+
+I will be meticulously checking these requirements in grading.
+
+Testing
+The best way to test your encryption is to use my version of the program to encrypt a file and then try decrypting with your program. 
+Doing the reverse is also important. If your program is not compatible with mine your grade will be significantly reduced.
+
+Make sure your program mimics my program in every way. This includes the format of message boxes, open file dialog filters etc. .
+
+I have given a similar assignment in the past. However, this is new. Looking at any solutions on GitHub will most likely result in you wasting time and open yourself to plagierism as you well know. 
+It will be easy for me and my staff to tell if you plagierize. An F for the course is certain.

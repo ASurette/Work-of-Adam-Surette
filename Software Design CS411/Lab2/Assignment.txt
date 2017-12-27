@@ -1,0 +1,2 @@
+Modify the final example in chapter two (dots with menu clear, right click clear, and button clear) to display the coordinate of the point to the right of the dot in the form (x, y). 
+You will have to re-create this example. It is NOT online, but important code is in the slides.

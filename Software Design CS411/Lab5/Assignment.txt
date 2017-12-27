@@ -1,0 +1,15 @@
+The object of this assignment is to design an application to generate numeric palindromes. 
+A numeric palindrome is a number that reads the same from right to left or left to right. For example, 1234321.
+
+A fully working implementation of this program can be found here. You are to duplicate all aspects and operation of this program. 
+Anything that does not match the example will result  in a loss of credit. This includes the layout and approximate size of the controls.
+
+There are two text boxes for the starting value and the number of palindromes to generate.
+You MUST check for conversion errors and numbers out of range.
+The button must be labelled properly.
+The list box is sized to the approximate width in my exammple and has 10 rows.
+A label control is at the bottom for user feedback.
+You must have a title form as well as a heading on the page.
+No unhandled exceptions are allowed. Test, test, and test some more.
+HINT: I tested for a palindrome by converting the number to a string, reversing the string and comparing to the original.
+Check your program against every key point and my solution.
